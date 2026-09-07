@@ -232,67 +232,65 @@ border-radius: 6px;
     <button onclick="unlock()">unlock</button>
     <p id="error"></p
                     </div>
-    <script>
-      function unlock() {
-        alert("BUTTON WORKS!");
-        const dob =
-          document.getElementById("dob").value;
+  <script>
+
+function unlock() {
+    const dob = document.getElementById("dob").value;
+
     if (dob === "2026-09-06") {
         showBirthday();
-       } else {
-        document.getElementById("error").textContent = "Hmm.. that's not the right date. Try again.";
-      }
-      }
+    } else {
+        document.getElementById("error").textContent =
+            "Hmm... that's not the right date. Try again.";
+    }
+}
+
 function showBirthday() {
     document.querySelector(".lock-screen").style.display = "none";
 
-    document.body.innerHTML += `
-        <div class="birthday-screen">
+    document.body.insertAdjacentHTML("beforeend",
+        '<div class="birthday-screen">' +
+            '<div class="balloons">' +
+                '<span>🎈</span>' +
+                '<span>🎈</span>' +
+                '<span>🎈</span>' +
+                '<span>🎈</span>' +
+                '<span>🎈</span>' +
+            '</div>' +
 
-            <div class="balloons">
-                <span>🎈</span>
-                <span>🎈</span>
-                <span>🎈</span>
-                <span>🎈</span>
-                <span>🎈</span>
-            </div>
-
-            <div class="birthday-content">
-                <div class="sparkle">✨ 🎉 ✨</div>
-
-                <h1>🎉 Happy Birthday! 🎉</h1>
-
-                <p>Something special is waiting for you...</p>
-
-                <button onclick="goToEnvelope()">Next</button>
-            </div>
-
-        </div>
-    `;
-      }
-      function goToEnvelope() {
-    document.querySelector(".birthday-screen").innerHTML = `
-        <div class="envelope-wrapper" 
-        onclick="openEnvelope()">
-
-    <div class="letter">
-        <h2>For you 💙</h2>
-        <p>Your birthday letter is waiting here...</p>
-    </div>
-
-    <div class="envelope">
-        💌
-    </div>
-</div>
-
-<p style="color: white; text-align: center;">
-    Tap the envelope 💌
-</p>
-    `;
-      }
-      function openEnvelope() {
-  document.querySelector(".envelope-wrapper").classList.add="open");
+            '<div class="birthday-content">' +
+                '<div class="sparkle">✨ 🎉 ✨</div>' +
+                '<h1>🎉 Happy Birthday! 🎉</h1>' +
+                '<p>Something special is waiting for you...</p>' +
+                '<button onclick="goToEnvelope()">Next</button>' +
+            '</div>' +
+        '</div>'
+    );
 }
-    </script>
+
+function goToEnvelope() {
+    document.querySelector(".birthday-screen").innerHTML =
+        '<div class="envelope-wrapper" onclick="openEnvelope()">' +
+
+            '<div class="letter">' +
+                '<h2>For you 💙</h2>' +
+                '<p>Your birthday letter is waiting here...</p>' +
+            '</div>' +
+
+            '<div class="envelope">💌</div>' +
+
+        '</div>' +
+
+        '<p style="color: white; text-align: center;">' +
+        'Tap the envelope 💌' +
+        '</p>';
+}
+
+function openEnvelope() {
+    document.querySelector(".envelope-wrapper").classList.add("open");
+}
+
+  </script>
+
   </body>
 </html> 
