@@ -243,32 +243,32 @@ border-radius: 6px;
       }
       }
 function showBirthday() {
-  document. querySelector(".lock-screen").style.display = "none";
-  document.body.innerHTML += `
-  <div class="birthday-screen">
+    document.querySelector(".lock-screen").style.display = "none";
 
-    <div class="balloons">
-        <span>🎈</span>
-        <span>🎈</span>
-        <span>🎈</span>
-        <span>🎈</span>
-        <span>🎈</span>
-    </div>
+    document.body.innerHTML += `
+        <div class="birthday-screen">
 
-    <div class="birthday-content">
-        <div class="sparkle">✨ ⭐ ✨</div>
+            <div class="balloons">
+                <span>🎈</span>
+                <span>🎈</span>
+                <span>🎈</span>
+                <span>🎈</span>
+                <span>🎈</span>
+            </div>
 
-        <h1>🎉 Happy Birthday! 🎉</h1>
+            <div class="birthday-content">
+                <div class="sparkle">✨ 🎉 ✨</div>
 
-        <p>Something special is waiting for you...</p>
+                <h1>🎉 Happy Birthday! 🎉</h1>
 
-        <button onclick="goToEnvelope()">Next</button>
-        
-    </div>
+                <p>Something special is waiting for you...</p>
 
-</div>
-`;
-    }
+                <button onclick="goToEnvelope()">Next</button>
+            </div>
+
+        </div>
+    `;
+      }
       function goToEnvelope() {
     document.querySelector(".birthday-screen").innerHTML = `
         <div class="envelope-wrapper" 
