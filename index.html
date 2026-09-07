@@ -157,8 +157,25 @@
 }
 
 .envelope-wrapper.open .letter {
-    transform: translateY(-170px);
+  position: absolute;
+  bottom: 35px;
+  left: 25px;
+  width: 210px;
+  min-height: 230px;
+  padding: 22px;
+  box-sizing: border-box;
+  background: white;
+  colour: #111;
+border-radius: 6px;
+  font-family: georgia, serif;
+  text-align: left;
+  z-index: 1;
+  transform: translateY(0);
+  transition: transform 1s ease;
 }
+  .envelope-wrapper.open. letter {
+    transform: transkateY(-170px);
+  }
     .lock-screen {
     min-height: 100vh;
     background: #050816;
@@ -254,7 +271,8 @@ function showBirthday() {
     }
       function goToEnvelope() {
     document.querySelector(".birthday-screen").innerHTML = `
-        <div class="envelope-wrapper" onclick="openEnvelope()">
+        <div class="envelope-wrapper" 
+        onclick="openEnvelope()">
 
     <div class="letter">
         <h2>For you 💙</h2>
@@ -264,7 +282,6 @@ function showBirthday() {
     <div class="envelope">
         💌
     </div>
-
 </div>
 
 <p style="color: white; text-align: center;">
@@ -273,7 +290,7 @@ function showBirthday() {
     `;
       }
       function openEnvelope() {
-  document. querySelector(".envelope-wrapper").classList. add="open");
+  document.querySelector(".envelope-wrapper").classList.add="open");
 }
     </script>
   </body>
