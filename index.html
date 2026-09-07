@@ -239,36 +239,26 @@ function showBirthday() {
     }
       function goToEnvelope() {
     document.querySelector(".birthday-screen").innerHTML = `
-        <div class="envelope" onclick="openEnvelope()">
-            💌
-        </div>
+        <div class="envelope-wrapper" onclick="openEnvelope()">
 
-        <p style="color: white; text-align: center;">
-            There's a little something inside...
-        </p>
+    <div class="letter">
+        <h2>For you 💙</h2>
+        <p>Your birthday letter is waiting here...</p>
+    </div>
+
+    <div class="envelope">
+        💌
+    </div>
+
+</div>
+
+<p style="color: white; text-align: center;">
+    Tap the envelope 💌
+</p>
     `;
       }
       function openEnvelope() {
-    document.querySelector(".envelope").innerHTML = `
-        <div style="
-            background: white;
-            color: #111;
-            width: 220px;
-            min-height: 260px;
-            padding: 25px;
-            box-sizing: border-box;
-            border-radius: 8px;
-            font-family: Georgia, serif;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        ">
-            <h2>For you 💙</h2>
-            <p>
-                Your birthday letter is waiting here...
-            </p>
-        </div>
-    `;
-      }
+  document. querySelector(".envelope-wrapper").classList. add="open");
 }
     </script>
   </body>
