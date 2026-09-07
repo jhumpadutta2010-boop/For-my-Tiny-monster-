@@ -706,7 +706,7 @@ input {
 
 <!-- FINAL -->
 
-<section id="finalScreen" class="screen">
+<section id="birthdayScreen" class="screen active">
 
     <div class="content">
 
@@ -760,7 +760,7 @@ function checkDOB() {
 
     const dob = document.getElementById("dob").value;
 
-    if (dob === "2026-09-15") {
+    if (dob === "2008-09-15") {
 
         showScreen("birthdayScreen");
 
