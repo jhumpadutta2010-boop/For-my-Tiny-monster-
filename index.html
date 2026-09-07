@@ -229,14 +229,14 @@ border-radius: 6px;
       <p>But first, prove its really you.</p>
     <p>Enter your date of birth to unlock it</p>
     <input type="date" id="dob">
-    <button onclick-"unlock()">unlock</button>
+    <button onclick="unlock()">unlock</button>
     <p id="error"></p
                     </div>
     <script>
       function unlock() {
         const dob =
           document.getElementById("dob").value;
-    if (dob === "2008-09-15") {
+    if (dob === "2026-09-06") {
         showBirthday();
        } else {
         document.getElementById("error").textContent = "Hmm.. that's not the right date. Try again.";
