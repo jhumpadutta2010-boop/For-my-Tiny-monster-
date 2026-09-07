@@ -760,7 +760,7 @@ function checkDOB() {
 
     const dob = document.getElementById("dob").value;
 
-    if (dob === "2008-09-15") {
+    if (dob === "2026-09-15") {
 
         showScreen("birthdayScreen");
 
