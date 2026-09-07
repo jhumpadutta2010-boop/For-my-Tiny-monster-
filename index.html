@@ -99,23 +99,50 @@
         transform: translateY(-25px);
     }
 }   
+.envelope-wrapper {
+    position: relative;
+    width: 260px;
+    height: 300px;
+    margin: 40px auto;
+    cursor: pointer;
+}
+
 .envelope {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
     width: 240px;
     height: 160px;
-    margin: 40px auto;
     background: #d9b99b;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 55px;
-    cursor: pointer;
+    z-index: 2;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease;
 }
 
-.envelope:hover {
-    transform: translateY(-8px);
+.letter {
+    position: absolute;
+    bottom: 35px;
+    left: 25px;
+    width: 210px;
+    min-height: 230px;
+    padding: 22px;
+    box-sizing: border-box;
+    background: white;
+    color: #111;
+    border-radius: 6px;
+    font-family: Georgia, serif;
+    text-align: left;
+    z-index: 1;
+    transform: translateY(0);
+    transition: transform 1s ease;
+}
+
+.envelope-wrapper.open .letter {
+    transform: translateY(-170px);
 }
     .lock-screen {
     min-height: 100vh;
