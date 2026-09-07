@@ -23,6 +23,82 @@
     font-size: 16px;
     cursor: pointer;
   }
+    .birthday-screen {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #020617, #111b4d, #240046);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.birthday-screen h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.birthday-screen p {
+    font-size: 18px;
+    opacity: 0.85;
+}
+ .balloons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.balloons span {
+    position: absolute;
+    font-size: 45px;
+    animation: floatBalloon 5s ease-in-out infinite;
+}
+
+.balloons span:nth-child(1) {
+    left: 10%;
+    top: 15%;
+}
+
+.balloons span:nth-child(2) {
+    left: 30%;
+    top: 65%;
+    animation-delay: 1s;
+}
+
+.balloons span:nth-child(3) {
+    right: 15%;
+    top: 20%;
+    animation-delay: 2s;
+}
+
+.balloons span:nth-child(4) {
+    right: 30%;
+    top: 70%;
+    animation-delay: 3s;
+}
+
+.balloons span:nth-child(5) {
+    left: 50%;
+    top: 10%;
+    animation-delay: 1.5s;
+}
+
+@keyframes floatBalloon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}   
   .envelope {
         width: 220px;
         height: 140px;
@@ -93,21 +169,16 @@
         const dob =
           document. getElementById("dob").value;
     if (dob === "2008-09-15) {
+        showBirthday();
+      }
         alert("unlocked!💝");
       } else {
         document. getElementById("error"). textContent = "Hmm.. that's not the right date. Try again.";
       }
       }
-    </script>
-    <script>
-function unlock() {
-    const dob = document.getElementById("dob").value;
-
-    if (dob === "2000-01-01") {
-        showBirthday();
-    } else {
-        document.getElementById("error").textContent =
-            "Hmm... that's not the right date. Try again.";
+function showBirthday() {
+  document. querySelector(".lock-screen").style.display = "none";
+  document.body.innerHTML +=
     }
 }
     </script>
