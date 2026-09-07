@@ -4,6 +4,25 @@
     <title>For Sir</title>
   </head>
   <style>
+  .lock-screen p {
+    font-size: 16px;
+    opacity : 0.8;
+    }
+  .lock-screen input {
+      margin: 20px 0;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+    }
+  .lock-screen button {
+    padding : 12px 28px;
+    border: none;
+    border-radius: 25px;
+    background: #4c8dff;
+    colour: white
+    font-size: 16px;
+    cursor: pointer;
+  }
   .envelope {
         width: 220px;
         height: 140px;
@@ -17,8 +36,23 @@
   }
     </style>
   <body>
+    <div class="lock screen"></div class="lock">🔐</div>
        <h1>A little something I made all by myself, just for you...</h1>
-      <p>Happy teacher's Day, Sir.</p>
-    <div class="envelope ">✉️</div>
+      <p>But first, prove its really you.</p>
+    <p>Enter your dateb of birth to unlock it</p>
+    <input type="date" id="dob">
+    <button onclick-"unlock()">unlock</button>
+    <p id="error"></p>
+    <script>
+      function unlock() {
+        const dob =
+          document. getElementById("dob").value;
+    if (dob === "2008-09-15) {
+        alert("unlocked!💝");
+      } else {
+        document. getElementById("error"). textContent = "Hmm.. that's not the right date. Try again.";
+      }
+      }
+    </script>
   </body>
 </html> 
