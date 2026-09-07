@@ -224,8 +224,7 @@ border-radius: 6px;
     </style>
   <body>
     <div class="lock screen">
-      
-    <div class="lock">🔐</div>
+       <div class="lock">🔐</div>
        <h1>A little something I made all by myself, just for you...</h1>
       <p>But first, prove its really you.</p>
     <p>Enter your date of birth to unlock it</p>
@@ -239,9 +238,7 @@ border-radius: 6px;
           document.getElementById("dob").value;
     if (dob === "2008-09-15") {
         showBirthday();
-      }
-        alert("unlocked!💝");
-      } else {
+       } else {
         document.getElementById("error").textContent = "Hmm.. that's not the right date. Try again.";
       }
       }
