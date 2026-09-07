@@ -1,1 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise 💙</title>
 
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #020617;
+    color: white;
+    overflow-x: hidden;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 17px;
+    background: #38bdf8;
+    color: #020617;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(56,189,248,.5);
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+/* ---------- COMMON ---------- */
+
+.screen {
+    min-height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.content {
+    width: 100%;
+    max-width: 600px;
+    z-index: 5;
+}
+
+/* ---------- LOCK ---------- */
+
+#lockScreen {
+    background:
+        radial-gradient(circle at top, #172554, transparent 45%),
+        #020617;
+}
+
+.lock {
+    font-size: 70px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+#lockScreen h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+#lockScreen p {
+    color: #cbd5e1;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+input {
+    margin: 20px 0;
+    padding: 15px;
+    width: min(280px, 90%);
+    border-radius: 12px;
+    border: 2px solid #38bdf8;
+    background: #0f172a;
+    color: white;
+    font-size: 17px;
+}
+
+#error {
+    color: #f87171;
+    min-height: 25px;
+}
+
+/* ---------- BIRTHDAY ---------- */
+
+#birthdayScreen {
+    background:
+        radial-gradient(circle at 20% 20%, #2563eb55, transparent 30%),
+        radial-gradient(circle at 80% 70%, #9333ea55, transparent 35%),
+        linear-gradient(135deg, #020617, #111b4d, #240046);
+}
+
+#birthdayScreen h1 {
+    font-size: clamp(38px, 10vw, 65px);
+    animation: birthdayPop 1s ease;
+}
+
+#birthdayScreen p {
+    font-size: 19px;
+    color: #dbeafe;
+}
+
+.balloons {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.balloon {
+    position: absolute;
+    font-size: 45px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.b1 { left: 8%; top: 15%; }
+.b2 { left: 75%; top: 12%; animation-delay: .7s; }
+.b3 { left: 15%; bottom: 15%; animation-delay: 1.3s; }
+.b4 { right: 8%; bottom: 20%; animation-delay: 2s; }
+.b5 { left: 45%; top: 8%; animation-delay: 2.5s; }
+
+/* ---------- ENVELOPE ---------- */
+
+#envelopeScreen {
+    background: linear-gradient(160deg, #020617, #0f172a, #172554);
+}
+
+.envelope-area {
+    position: relative;
+    width: 280px;
+    height: 330px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.envelope {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 240px;
+    height: 160px;
+    background: #bfdbfe;
+    border-radius: 10px;
+    z-index: 3;
+    box-shadow: 0 15px 40px #0008;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-top: 85px solid #93c5fd;
+}
+
+.letter {
+    position: absolute;
+    left: 35px;
+    bottom: 35px;
+    width: 210px;
+    min-height: 240px;
+    background: #fff;
+    color: #111827;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 2;
+    transition: 1s ease;
+    font-family: Georgia, serif;
+    text-align: left;
+}
+
+.envelope-area.open .letter {
+    transform: translateY(-190px);
+}
+
+.envelope-heart {
+    position: absolute;
+    z-index: 4;
+    left: 105px;
+    top: 65px;
+    font-size: 35px;
+}
+
+/* ---------- LETTER ---------- */
+
+#letterScreen {
+    background: #020617;
+}
+
+.letter-card {
+    background: rgba(15,23,42,.9);
+    border: 1px solid #38bdf855;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 40px #0ea5e933;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.letter-card h2 {
+    text-align: center;
+    color: #7dd3fc;
+}
+
+/* ---------- CAKE ---------- */
+
+#cakeScreen {
+    background:
+        radial-gradient(circle, #312e81, #020617 65%);
+}
+
+.cake {
+    position: relative;
+    width: 230px;
+    height: 180px;
+    margin: 50px auto 30px;
+}
+
+.cake-top {
+    position: absolute;
+    top: 40px;
+    left: 15px;
+    width: 200px;
+    height: 45px;
+    background: #60a5fa;
+    border-radius: 50%;
+}
+
+.cake-body {
+    position: absolute;
+    top: 60px;
+    left: 15px;
+    width: 200px;
+    height: 100px;
+    background: #2563eb;
+    border-radius: 10px 10px 25px 25px;
+}
+
+.candle {
+    position: absolute;
+    top: -45px;
+    width: 55px;
+    height: 60px;
+    background: #e0f2fe;
+    color: #0f172a;
+    font-size: 38px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    z-index: 4;
+}
+
+.candle.one {
+    left: 55px;
+}
+
+.candle.eight {
+    right: 55px;
+}
+
+.flame {
+    position: absolute;
+    top: -35px;
+    font-size: 30px;
+    animation: flicker .5s infinite alternate;
+}
+
+.candle.one .flame {
+    left: 12px;
+}
+
+.candle.eight .flame {
+    left: 12px;
+}
+
+.flame.off {
+    display: none;
+}
+
+.countdown {
+    font-size: 70px;
+    font-weight: bold;
+    color: #7dd3fc;
+    min-height: 85px;
+}
+
+/* ---------- PHOTOS ---------- */
+
+#photosScreen {
+    background: linear-gradient(145deg, #020617, #111827);
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin: 25px 0;
+}
+
+.photo-card {
+    background: white;
+    padding: 10px 10px 25px;
+    color: #111;
+    transform: rotate(-3deg);
+    box-shadow: 0 12px 25px #0008;
+}
+
+.photo-card:nth-child(even) {
+    transform: rotate(4deg);
+}
+
+.photo-placeholder {
+    height: 170px;
+    background: linear-gradient(135deg, #172554, #581c87);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bae6fd;
+    font-size: 40px;
+}
+
+/* ---------- DISCLAIMER ---------- */
+
+#disclaimerScreen {
+    background: #020617;
+}
+
+.warning {
+    border: 2px solid #38bdf8;
+    padding: 28px;
+    border-radius: 10px;
+    background: #0f172a;
+    text-align: left;
+    box-shadow: 0 0 30px #38bdf833;
+}
+
+.warning h2 {
+    color: #67e8f9;
+}
+
+.warning .classified {
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 5px;
+}
+
+/* ---------- FINAL ---------- */
+
+#finalScreen {
+    background:
+        radial-gradient(circle at center, #312e81, transparent 50%),
+        #020617;
+}
+
+#finalScreen h1 {
+    font-size: clamp(38px, 10vw, 60px);
+    color: #7dd3fc;
+}
+
+.stars {
+    font-size: 30px;
+    letter-spacing: 15px;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes pulse {
+    50% { transform: scale(1.1); }
+}
+
+@keyframes float {
+    50% { transform: translateY(-30px) rotate(5deg); }
+}
+
+@keyframes birthdayPop {
+    0% {
+        transform: scale(.4);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes flicker {
+    from { transform: scale(1) rotate(-3deg); }
+    to { transform: scale(1.15) rotate(3deg); }
+}
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    font-size: 25px;
+    animation: fall 3s linear forwards;
+    z-index: 100;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .photo-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .photo-placeholder {
+        height: 130px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOCK SCREEN -->
+
+<section id="lockScreen" class="screen active">
+    <div class="content">
+
+        <div class="lock">🔒</div>
+
+        <h1>A little surprise is waiting for you...</h1>
+
+        <p>
+            But first, prove it's really you.
+        </p>
+
+        <p>
+            Enter your date of birth to unlock it.
+        </p>
+
+        <input type="date" id="dob">
+
+        <br>
+
+        <button onclick="checkDOB()">Next</button>
+
+        <p id="error"></p>
+
+    </div>
+</section>
+
+
+<!-- BIRTHDAY SCREEN -->
+
+<section id="birthdayScreen" class="screen">
+    <div class="balloons">
+        <span class="balloon b1">🎈</span>
+        <span class="balloon b2">🎈</span>
+        <span class="balloon b3">🎈</span>
+        <span class="balloon b4">🎈</span>
+        <span class="balloon b5">🎈</span>
+    </div>
+
+    <div class="content">
+        <h1>🎉 Happy 18th Birthday! 🎉</h1>
+
+        <p>
+            You made it this far...
+            now there's a little surprise waiting.
+        </p>
+
+        <button onclick="showEnvelope()">Next</button>
+    </div>
+</section>
+
+
+<!-- ENVELOPE -->
+
+<section id="envelopeScreen" class="screen">
+
+    <div class="content">
+
+        <h2>A little something for you 💙</h2>
+
+        <div class="envelope-area" onclick="openEnvelope()">
+
+            <div class="letter">
+                <h3>For you 💙</h3>
+                <p>
+                    There's a whole birthday message waiting
+                    inside this little envelope.
+                </p>
+                <p>
+                    Tap it again when you're ready.
+                </p>
+            </div>
+
+            <div class="envelope">
+                <div class="envelope-heart">💙</div>
+            </div>
+
+        </div>
+
+        <button onclick="showLetter()">Next</button>
+
+    </div>
+</section>
+
+
+<!-- LETTER -->
+
+<section id="letterScreen" class="screen">
+
+    <div class="content">
+
+        <div class="letter-card">
+
+            <h2>Happy Birthday 💙</h2>
+
+            <p>
+                Happy birthday to you!
+            </p>
+
+            <p>
+                Eighteen is a pretty big milestone, so I wanted
+                to make something a little different instead
+                of just sending a normal birthday message.
+            </p>
+
+            <p>
+                I hope this year brings you lots of good moments,
+                new memories, plenty of reasons to smile,
+                and everything you're working towards.
+            </p>
+
+            <p>
+                Keep being yourself, keep growing, and enjoy
+                your day because today is yours.
+            </p>
+
+            <p>
+                Now... there's a cake waiting. 🎂
+            </p>
+
+        </div>
+
+        <br>
+
+        <button onclick="showCake()">Next</button>
+
+    </div>
+</section>
+
+
+<!-- CAKE -->
+
+<section id="cakeScreen" class="screen">
+
+    <div class="content">
+
+        <h1>The birthday cake 🎂</h1>
+
+        <div class="cake">
+
+            <div class="cake-body"></div>
+
+            <div class="cake-top">
+
+                <div class="candle one">
+                    1
+                    <span class="flame">🔥</span>
+                </div>
+
+                <div class="candle eight">
+                    8
+                    <span class="flame">🔥</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="countdown" id="countdown"></div>
+
+        <button id="blowButton" onclick="startCountdown()">
+            Blow out the candles
+        </button>
+
+        <br><br>
+
+        <button id="cakeNext" onclick="showPhotos()" style="display:none;">
+            Next
+        </button>
+
+    </div>
+</section>
+
+
+<!-- PHOTOS -->
+
+<section id="photosScreen" class="screen">
+
+    <div class="content">
+
+        <h1>Some memories 📸</h1>
+
+        <p>
+            A few little snapshots for the birthday archive.
+        </p>
+
+        <div class="photo-grid">
+
+            <div class="photo-card">
+                <div class="photo-placeholder">📷</div>
+                <p>Memory #1</p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-placeholder">📷</div>
+                <p>Memory #2</p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-placeholder">📷</div>
+                <p>Memory #3</p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-placeholder">📷</div>
+                <p>Memory #4</p>
+            </div>
+
+        </div>
+
+        <button onclick="showDisclaimer()">Next</button>
+
+    </div>
+</section>
+
+
+<!-- DISCLAIMER -->
+
+<section id="disclaimerScreen" class="screen">
+
+    <div class="content">
+
+        <div class="warning">
+
+            <div class="classified">
+                CLASSIFIED
+            </div>
+
+            <h2>Birthday Disclaimer ⚠️</h2>
+
+            <p>
+                This website contains:
+            </p>
+
+            <p>
+                ✓ excessive birthday wishes
+                <br>
+                ✓ questionable amounts of cake
+                <br>
+                ✓ old memories
+                <br>
+                ✓ random nonsense
+                <br>
+                ✓ one officially upgraded 18-year-old
+            </p>
+
+            <p>
+                Proceed with caution.
+            </p>
+
+            <p>
+                Side effects may include smiling,
+                embarrassment, and wondering why someone
+                spent this much time making a website.
+            </p>
+
+        </div>
+
+        <br>
+
+        <button onclick="showFinal()">Continue</button>
+
+    </div>
+</section>
+
+
+<!-- FINAL -->
+
+<section id="finalScreen" class="screen">
+
+    <div class="content">
+
+        <div class="stars">
+            ✦ ✧ ✦
+        </div>
+
+        <h1>That's all... for now. 💙</h1>
+
+        <p>
+            Happy 18th Birthday once again.
+        </p>
+
+        <p>
+            I hope you have an amazing year ahead.
+        </p>
+
+        <p>
+            — Made especially for your birthday ✨
+        </p>
+
+        <br>
+
+        <div class="stars">
+            ✦ ✧ ✦
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+
+/* ---------- SCREEN SWITCHER ---------- */
+
+function showScreen(id) {
+
+    document.querySelectorAll(".screen").forEach(function(screen) {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    window.scrollTo(0, 0);
+}
+
+
+/* ---------- DOB ---------- */
+
+function checkDOB() {
+
+    const dob = document.getElementById("dob").value;
+
+    if (dob === "2008-09-15") {
+
+        showScreen("birthdayScreen");
+
+        birthdayConfetti();
+
+    } else {
+
+        document.getElementById("error").textContent =
+            "Hmm... that's not the right date. Try again.";
+
+    }
+}
+
+
+/* ---------- BIRTHDAY ---------- */
+
+function birthdayConfetti() {
+
+    const symbols = ["🎈", "🎉", "✨", "💙", "💜"];
+
+    for (let i = 0; i < 30; i++) {
+
+        const piece = document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+        document.body.appendChild(piece);
+
+        setTimeout(function() {
+            piece.remove();
+        }, 4500);
+    }
+}
+
+
+function showEnvelope() {
+
+    showScreen("envelopeScreen");
+
+}
+
+
+function openEnvelope() {
+
+    document.querySelector(".envelope-area")
+        .classList.add("open");
+
+}
+
+
+function showLetter() {
+
+    showScreen("letterScreen");
+
+}
+
+
+/* ---------- CAKE ---------- */
+
+function showCake() {
+
+    showScreen("cakeScreen");
+
+}
+
+
+function startCountdown() {
+
+    document.getElementById("blowButton").style.display = "none";
+
+    let number = 3;
+
+    const countdown = document.getElementById("countdown");
+
+    countdown.textContent = number;
+
+    const timer = setInterval(function() {
+
+        number--;
+
+        if (number > 0) {
+
+            countdown.textContent = number;
+
+        } else {
+
+            clearInterval(timer);
+
+            countdown.textContent = "✨";
+
+            document.querySelectorAll(".flame")
+                .forEach(function(flame) {
+                    flame.classList.add("off");
+                });
+
+            birthdayConfetti();
+
+            document.getElementById("cakeNext")
+                .style.display = "inline-block";
+
+        }
+
+    }, 1000);
+
+}
+
+
+/* ---------- PHOTOS ---------- */
+
+function showPhotos() {
+
+    showScreen("photosScreen");
+
+}
+
+
+/* ---------- DISCLAIMER ---------- */
+
+function showDisclaimer() {
+
+    showScreen("disclaimerScreen");
+
+}
+
+
+/* ---------- FINAL ---------- */
+
+function showFinal() {
+
+    showScreen("finalScreen");
+
+    birthdayConfetti();
+
+}
+
+</script>
+
+</body>
+</html>
